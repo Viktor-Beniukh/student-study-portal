@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Dictionary{% endblock %}
+
+{% block content %}
+
+  <section class="text-center container mt-5">
+    <h2>Student Dictionary</h2>
+    <p>Enter any word to get the phonetics, definition and an example for the word</p>
+    <form action="" method="post">
+      {% csrf_token %}
+      {{ form }}
+      <input class="btn btn-info" type="submit" value="🔎">
+    </form><br>
+
+    <div class="content-section mt-5 bg-info pt-3 pb-3 rounded-4" style="box-shadow: 15px 15px 10px rgb(78, 77, 77);">
+      {% if input %}
+      <div class="custom-header">
+        <h2><strong>{{ input }}</strong></h2>
+        <h6>{{ phonetics }}</h6>
+        <audio id="player" src="{{ audio }}"></audio>
+        <div>
+          <a onclick="playAudio(event)"><i class="bi bi-volume-up"></i></a>
+        </div>
+      </div>
+
+      <hr class="p-0 m-0 mb-3">
+
+      <h4><strong>Definition:</strong> <em>{{ definition }}</em></h4>
+      <h4><strong>Example:</strong> <em>{{ example }}</em></h4>
+
+
+      <span style="font-size: 20px"><strong>Synonyms:</strong></span>
+      {% for synonym in synonyms %}
+        <span>{{ synonym }}, </span>
+      {% endfor %}
+        <hr>
+
+    </div>
+      {% else %}
+        <h2>Sorry, API request limit exceeded</h2>
+      {% endif %}
+  </section>
+
+{% endblock %}
+
+
+{% block scripts %}
+  {{ block.super }}
+  <script>
+    function playAudio(event) {
+      event.preventDefault();
+      var audioPlayer = document.getElementById('player');
+      audioPlayer.play();
+    }
+  </script>
+{% endblock %}
