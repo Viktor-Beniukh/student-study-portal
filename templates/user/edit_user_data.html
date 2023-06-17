@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_filters %}
+
+{% block title %}Edit Settings{% endblock %}
+
+{% block content %}
+
+  <div class="container mt-5 text-bg-info rounded-4" style="box-shadow: 15px 15px 10px rgb(78, 77, 77);">
+    <div class="row">
+      <div class="col-md-2"></div>
+
+      <div class="col-md-9 mt-5">
+
+        <h1>Edit User Settings...</h1><br><br>
+
+        <br>
+        <div class="form-group">
+
+          <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}<br>
+            <button class="btn btn-secondary mb-5" type="submit">Update Settings</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <br><br><br><br><br><br><br>
+
+{% endblock %}
