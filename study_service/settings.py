@@ -134,6 +134,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = "user.User"
 
+LOGIN_REDIRECT_URL = "/"
+
+if DEBUG:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -160,3 +165,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+BOOK_SEARCH_URL = "https://www.googleapis.com/books/v1/volumes?q="
+DICTIONARY_SEARCH_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/"
